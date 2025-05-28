@@ -1,25 +1,22 @@
 trigger:
-- master  # ya jo bhi tumhara branch hai
+- main
 
 pool:
   name: gittoacr
 
 steps:
-
-# 1️⃣ Copy index.html to artifact staging folder
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: '**/*.html'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-# 2️⃣ Publish as Universal Package to artifactstesting feed
 - task: UniversalPackages@0
   inputs:
     command: 'publish'
     publishDirectory: '$(Build.ArtifactStagingDirectory)'
     feedsToUse: 'internal'
-    vstsFeed: 'mnabeelbhatti/artifactstesting'   # ✅ Ye line update hui hai
+    vstsFeed: 'mnabeelbhatti/artifactstesting'
     packageName: 'my-first-package'
     packageVersion: '0.0.$(Build.BuildId)'
     description: 'Welcome to Universal Packages'
