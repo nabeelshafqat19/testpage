@@ -2,7 +2,7 @@ trigger:
 - master  # tumhara branch
 
 pool:
-  vmImage: 'testagent'
+  name: gittoacr
 
 variables:
   artifactName: 'htmlpage'
