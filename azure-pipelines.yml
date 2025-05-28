@@ -6,20 +6,20 @@ pool:
 
 steps:
 
-# 1️⃣ Copy your HTML or build output to artifact staging directory
+# 1️⃣ Copy index.html to artifact staging folder
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)'
     Contents: '**/*.html'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-# 2️⃣ Publish as Universal Package to Azure Artifacts
+# 2️⃣ Publish as Universal Package to artifactstesting feed
 - task: UniversalPackages@0
   inputs:
     command: 'publish'
     publishDirectory: '$(Build.ArtifactStagingDirectory)'
     feedsToUse: 'internal'
-    vstsFeed: 'mnabeelbhatti/pipelineartifacts'  # 🔥 make sure this is correct
-    packageName: 'htmlpage'
-    packageVersion: '1.0.$(Build.BuildId)'  # Auto-increment version
-    description: 'Publishing index.html via pipeline 🚀'
+    vstsFeed: 'mnabeelbhatti/artifactstesting'   # ✅ Ye line update hui hai
+    packageName: 'my-first-package'
+    packageVersion: '0.0.$(Build.BuildId)'
+    description: 'Welcome to Universal Packages'
