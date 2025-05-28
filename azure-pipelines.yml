@@ -1,23 +1,27 @@
 trigger:
-- master  # tumhara branch
+- master  # ya jo bhi tumhara branch hai
 
 pool:
   name: gittoacr
 
 variables:
   artifactName: 'htmlpage'
+  version: '1.0.$(Build.BuildId)'
 
 steps:
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '.'
+    rootFolderOrFile: '.'  # current folder jahan index.html hai
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(artifactName).zip'
     replaceExistingArchive: true
 
-- task: PublishBuildArtifacts@1
+- task: UniversalPackages@0
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(artifactName).zip'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    command: 'publish'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'  # ZIP yahan banta hai
+    feedsToUse: 'internal'
+    vstsFeed: 'mnabeelbhatti/pipelineartifacts'  # yahi tumhara feed name hai
+    packageName: 'htmlpage'
+    packageVersion: '$(version)'
