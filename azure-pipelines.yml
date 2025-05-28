@@ -20,8 +20,8 @@ steps:
 - task: UniversalPackages@0
   inputs:
     command: 'publish'
-    publishDirectory: '$(Build.ArtifactStagingDirectory)'  # ZIP yahan banta hai
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'
     feedsToUse: 'internal'
-    vstsFeed: 'mnabeelbhatti/pipelineartifacts'  # yahi tumhara feed name hai
+    vstsFeed: 'mnabeelbhatti/pipelineartifacts'  # make sure project/feed name is correct
     packageName: 'htmlpage'
-    packageVersion: '$(version)'
+    packageVersion: '1.0.$(Build.BuildId)'
